@@ -30,12 +30,12 @@ service.interceptors.request.use(
     }
     // 1. 判断用户是否登录
     // 从 cookie 中取出数据
-    const userInfo = getCookie(userInfoCookie);
+    const token = getCookie(userInfoCookie);
 
     // 存在数据，则已登录
-    if (userInfo) {
+    if (token) {
       // 用户已登录，则把 token 放入请求头
-      config.headers["token"] = userInfo.token;
+      config.headers["token"] = token;
     } else {
       // 用户未登录，判断请求路径是否在白名单内
       // 不在白名单内，直接重定向到登录页
@@ -51,6 +51,7 @@ service.interceptors.request.use(
         );
       }
     }
+    console.log("headersToken", config.headers["token"]);
     // 2. 给 post 请求数据加密 TODO 目前默认所有 post 请求体都加密
     if (config.method === "post" && config.url && config.data) {
       const ivBase64 = generateRandomIV();

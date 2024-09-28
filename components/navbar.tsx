@@ -47,6 +47,7 @@ import { logoutAction } from "@/app/auth/login/action";
 import { BaseResponse } from "@/types";
 import { CustomError } from "@/types/error/Error";
 import { ErrorCode } from "@/types/error/ErrorCode";
+import { hidden } from "next/dist/lib/picocolors";
 
 export const Navbar = () => {
   const currentPath = usePathname();
@@ -161,36 +162,27 @@ export const Navbar = () => {
             Sign In
           </Button>
         </NavbarItem>
-        <NavbarItem
-          className={clsx({
-            hidden: !!getCookie(userInfoCookie),
-            // hidden: false,
-          })}
-        >
-          <Button
-            as={Link}
-            color="primary"
-            variant="flat"
-          >
+        <NavbarItem>
+          <Button color="primary" variant="flat">
             test
           </Button>
         </NavbarItem>
         <Dropdown
           showArrow
-          className={clsx({
-            hidden: !getCookie(userInfoCookie),
-            // hidden: false,
-          })}
           classNames={{
             base: "before:bg-default-200", // change arrow background
             content: "p-0 border-small border-divider bg-background",
           }}
           radius="sm"
         >
-          <Badge color="danger" content="5">
+          <Badge className="hidden" color="danger" content="5">
             <DropdownTrigger>
               <Avatar
                 isBordered
+                className={clsx({
+                  hidden: !getCookie(),
+                  // hidden: true,
+                })}
                 color={"danger"}
                 radius="lg"
                 src="https://blogback.yannqing.com/api/v2/objects/avatar/0vqxqul8pu2skmwokn.jpg"

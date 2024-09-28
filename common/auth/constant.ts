@@ -14,7 +14,7 @@ export const cookieExpireWithoutRememberMe = 1 / 86400;
 /**
  * 用户信息的 cookie key 键，包含了 token
  */
-export const userInfoCookie = "userInfo";
+export const userInfoCookie = "token";
 
 /**
  * 后端请求白名单（不需要登录可以访问的 api）

@@ -35,7 +35,8 @@ export function getCookie(key?: string) {
   }
 
   if (cookieStr) {
-    return JSON.parse(cookieStr);
+    return cookieStr;
+    // return JSON.parse(cookieStr);
   }
 
   return null;
