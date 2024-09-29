@@ -41,31 +41,34 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
-import { getCookie, removeCookie } from "@/utils/cookies";
-import { userInfoCookie } from "@/common/auth/constant";
+import { removeCookie } from "@/utils/cookies";
 import { logoutAction } from "@/app/auth/login/action";
 import { BaseResponse } from "@/types";
 import { CustomError } from "@/types/error/Error";
 import { ErrorCode } from "@/types/error/ErrorCode";
-import { hidden } from "next/dist/lib/picocolors";
+import { useGetUserContext } from "@/app/UserContext";
 
 export const Navbar = () => {
   const currentPath = usePathname();
 
   const router = useRouter();
 
+  const { isCookiePresent, updateCookie, deleteCookie } = useGetUserContext();
+
   async function clickToLogout() {
     try {
       await logoutAction().then((res: BaseResponse) => {
         if (res.success) {
-          removeCookie();
           toast.success("退出登录成功！");
           router.push(currentPath);
         } else {
           toast.error("退出登录失败，请联系管理员！");
         }
+        // 无论是否退出成功，都要把 cookie 删除
+        deleteCookie();
       });
     } catch (error) {
+      deleteCookie();
       // 异常统一被 响应拦截器捕获
       if (error instanceof CustomError) {
         if (
@@ -149,7 +152,7 @@ export const Navbar = () => {
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <NavbarItem
           className={clsx({
-            hidden: !!getCookie(userInfoCookie),
+            hidden: isCookiePresent,
             // hidden: false,
           })}
         >
@@ -175,12 +178,19 @@ export const Navbar = () => {
           }}
           radius="sm"
         >
-          <Badge className="hidden" color="danger" content="5">
+          <Badge
+            className={clsx({
+              hidden: !isCookiePresent,
+              // hidden: true,
+            })}
+            color="danger"
+            content="5"
+          >
             <DropdownTrigger>
               <Avatar
                 isBordered
                 className={clsx({
-                  hidden: !getCookie(),
+                  hidden: !isCookiePresent,
                   // hidden: true,
                 })}
                 color={"danger"}

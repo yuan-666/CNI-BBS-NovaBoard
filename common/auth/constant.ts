@@ -9,12 +9,12 @@ export const keyOne = "eW1awsJiSLH7CGnmPGvBQZyPmACHTQYImNJPAu34fzs=";
  * - 不记住我 1h
  */
 export const cookieExpireWithRememberMe = 7;
-export const cookieExpireWithoutRememberMe = 1 / 86400;
+export const cookieExpireWithoutRememberMe = 1;
 
 /**
  * 用户信息的 cookie key 键，包含了 token
  */
-export const userInfoCookie = "token";
+export const userInfoCookie = "userInfo";
 
 /**
  * 后端请求白名单（不需要登录可以访问的 api）

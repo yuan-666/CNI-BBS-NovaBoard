@@ -30,12 +30,14 @@ service.interceptors.request.use(
     }
     // 1. 判断用户是否登录
     // 从 cookie 中取出数据
-    const token = getCookie(userInfoCookie);
+    const userInfo = getCookie(userInfoCookie);
+
+    console.log("userInfo", userInfo);
 
     // 存在数据，则已登录
-    if (token) {
+    if (userInfo) {
       // 用户已登录，则把 token 放入请求头
-      config.headers["token"] = token;
+      config.headers["token"] = userInfo.token;
     } else {
       // 用户未登录，判断请求路径是否在白名单内
       // 不在白名单内，直接重定向到登录页
@@ -75,6 +77,7 @@ service.interceptors.request.use(
 // Add a response interceptor 响应拦截器
 service.interceptors.response.use(
   function (response) {
+
     // 获取响应状态码和数据
     const status = response.status;
     const data = response.data;
@@ -130,6 +133,7 @@ service.interceptors.response.use(
     }
   },
   function (error) {
+    console.log("111");
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     toast.error(ErrorCode.SERVER_ERROR.message);

@@ -16,7 +16,7 @@ import { DiscordIcon, GithubIcon, TwitterIcon } from "@/components/icons";
 import { siteConfig } from "@/config/site";
 import { loginAction } from "@/app/auth/login/action";
 import { BaseResponse } from "@/types";
-import { setCookie } from "@/utils/cookies";
+import { useGetUserContext } from "@/app/UserContext";
 import { userInfoCookie } from "@/common/auth/constant";
 
 export default function LoginPage() {
@@ -25,6 +25,8 @@ export default function LoginPage() {
   const [isVisible, setIsVisible] = React.useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const { isCookiePresent, updateCookie, deleteCookie } = useGetUserContext();
 
   const [loginRequest, setLoginRequest] = useState({
     username: "",
@@ -41,8 +43,7 @@ export default function LoginPage() {
         if (res.data) {
           toast.success("login success");
           router.push("/");
-          console.log("cookie", JSON.stringify(res.data));
-          // setCookie(userInfoCookie, JSON.stringify(res.data));
+          updateCookie(userInfoCookie, JSON.stringify(res.data), false);
         } else {
           toast.error("服务器异常，请重试！");
         }
