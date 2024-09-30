@@ -6,7 +6,7 @@ export const keyOne = "eW1awsJiSLH7CGnmPGvBQZyPmACHTQYImNJPAu34fzs=";
 /**
  * cookie 过期时间
  * - 记住我 7d
- * - 不记住我 1h
+ * - 不记住我 1d
  */
 export const cookieExpireWithRememberMe = 7;
 export const cookieExpireWithoutRememberMe = 1;
@@ -22,6 +22,7 @@ export const userInfoCookie = "userInfo";
 export const whiteList = [
   "/user/open/login",
   "/user/open/register",
+  "/category/open/list",
   "/system/verif/gen/random",
   "/system/verif/check3",
 ];

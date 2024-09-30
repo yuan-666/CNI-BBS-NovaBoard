@@ -37,7 +37,6 @@ export default function LoginPage() {
 
   async function clickToLogin() {
     loginAction(loginRequest).then((res: BaseResponse) => {
-      console.log("login Result:", res);
       if (res.success === true) {
         // 判断后端返回数据是否有错
         if (res.data) {

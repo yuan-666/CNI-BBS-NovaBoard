@@ -7,14 +7,12 @@ export default function HomeLayout({
 }) {
   return (
     <section className="flex flex-col gap-4">
-      <div className="flex flex-row">
-        <div className="w-full">
+      <div className="flex flex-row w-full">
+        <div className="w-full md:w-3/4">
           <TopBar />
-          <main className="bg-amber-600 w-full mt-5 h-screen">{children}</main>
+          <main className="w-full mt-5 h-screen">{children}</main>
         </div>
-        <div className="hidden md:block w-full ml-6 bg-blue-500 h-screen">
-          xxx
-        </div>
+        <div className="hidden md:flex w-1/4 ml-6 h-screen">xxx</div>
       </div>
     </section>
   );

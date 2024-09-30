@@ -41,12 +41,12 @@ import {
   SearchIcon,
   Logo,
 } from "@/components/icons";
-import { removeCookie } from "@/utils/cookies";
 import { logoutAction } from "@/app/auth/login/action";
 import { BaseResponse } from "@/types";
 import { CustomError } from "@/types/error/Error";
 import { ErrorCode } from "@/types/error/ErrorCode";
 import { useGetUserContext } from "@/app/UserContext";
+import { getCookie } from "@/utils/cookies";
 
 export const Navbar = () => {
   const currentPath = usePathname();
@@ -57,7 +57,7 @@ export const Navbar = () => {
 
   async function clickToLogout() {
     try {
-      await logoutAction().then((res: BaseResponse) => {
+      await logoutAction(getCookie().id).then((res: BaseResponse) => {
         if (res.success) {
           toast.success("退出登录成功！");
           router.push(currentPath);

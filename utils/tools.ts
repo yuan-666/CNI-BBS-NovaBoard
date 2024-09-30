@@ -92,3 +92,26 @@ export function exformatBase64(base64Str: string) {
 export function deformatBase64(base64Str: string) {
   return base64Str.replace(/_/g, "/").replace(/-/g, "+");
 }
+
+/**
+ * 为 url 匹配创建正则表达式
+ * @param pattern
+ */
+function createRegex(pattern: string): RegExp {
+  // 将通配符转换为正则表达式
+  const regexPattern = pattern
+    .replace(/\*\*/g, ".*") // ** 匹配任意数量的路径
+    .replace(/\*/g, "[^/]+") // * 匹配单个路径段
+    .replace(/\//g, "\\/"); // 转义斜杠
+
+  return new RegExp(`^${regexPattern}$`);
+}
+
+/**
+ * 使用正则表达式对 url 进行匹配
+ * @param url
+ * @param whiteList
+ */
+export function matchesWhiteList(url: string, whiteList: []): boolean {
+  return whiteList.some((pattern) => createRegex(pattern).test(url));
+}

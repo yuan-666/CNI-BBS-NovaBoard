@@ -15,7 +15,6 @@ import { CustomError } from "@/types/error/Error";
  * @param rememberMe 可选：记住我
  */
 export function setCookie(key: string, value: string, rememberMe?: boolean) {
-  console.log("set....");
   Cookies.set(key, value, {
     expires: rememberMe
       ? cookieExpireWithRememberMe

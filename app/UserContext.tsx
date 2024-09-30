@@ -50,7 +50,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const updateCookie = (key: string, value: string, rememberMe: boolean) => {
-    console.log("updateCookie", key, value, rememberMe);
     setCookie(key, value, rememberMe);
     checkCookie(); // 更新状态
   };
@@ -60,6 +59,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     checkCookie();
   };
 
+  // 类似于 mounted
   useEffect(() => {
     checkCookie(); // 初始检查
   }, []);
