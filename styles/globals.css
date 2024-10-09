@@ -9,3 +9,18 @@
 .scroll-hidden::-webkit-scrollbar {
     display: none; /* Chrome, Safari 和 Opera */
 }
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px); /* 向下位移 */
+        opacity: 0; /* 初始透明度 */
+    }
+    to {
+        transform: translateY(0); /* 恢复到原位 */
+        opacity: 1; /* 完全不透明 */
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.3s ease-out; /* 动画时长和缓动函数 */
+}

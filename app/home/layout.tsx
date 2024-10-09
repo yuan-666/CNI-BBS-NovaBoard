@@ -10,7 +10,7 @@ export default function HomeLayout({
       <div className="flex flex-row w-full">
         <div className="w-full md:w-3/4">
           <TopBar />
-          <main className="w-full mt-5 h-screen">{children}</main>
+          <main className="w-full mt-5">{children}</main>
         </div>
         <div className="hidden md:flex w-1/4 ml-6 h-screen">xxx</div>
       </div>
